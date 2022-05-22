@@ -1,0 +1,24 @@
+Last login: Sat May 21 11:29:01 on console
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Arrow function to add 2 to a given number
+undefined
+> const addTwo = (num) => {
+... return num + 2;
+... };
+undefined
+> console.log(addTwo(10));
+12
+undefined
+> // Arrow function to add the letter s to a string_decoder
+undefined
+> const addS = (input) => {
+... return input + 's';
+... };
+undefined
+> console.log(addS("Mitansh'"));
+Mitansh's
+undefined
+> 
+

@@ -1,0 +1,78 @@
+Last login: Fri May 20 09:39:49 on console
+node -v
+➜  ~ node -v
+v16.15.0
+➜  ~ npm -v
+8.5.5
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> console.log('Hello World')
+Hello World
+undefined
+> console.log(10+10)
+20
+undefined
+> console.log(3.0 === 3)
+true
+undefined
+> console.log("Mitansh" + "Khurana")
+MitanshKhurana
+undefined
+> console.log(typeof(42))
+number
+undefined
+> console.log(typeof(true))
+boolean
+undefined
+> console.log(typeof([1, ,2, 3]))
+object
+undefined
+> console.log(typeof([null))
+console.log(typeof([null))
+                        ^
+
+Uncaught SyntaxError: Unexpected token ')'
+> console.log(typeof(null))
+object
+undefined
+> let name = "Mitansh"
+undefined
+> console.log(name)
+Mitansh
+undefined
+> var namesArray = ["Rahul", "Saurav"]
+undefined
+> console.log(namesArray)
+[ 'Rahul', 'Saurav' ]
+undefined
+> let age = 20;
+undefined
+> if(age >= 18){}
+undefined
+> if(age >= 18){console.log("Can drive")}\
+if(age >= 18){console.log("Can drive")}\
+                                       ^
+
+Uncaught SyntaxError: Invalid or unexpected token
+> if(age >= 18){
+... console.log("Can Drive")
+... } else{
+... console.log("Can't Drive")
+... }
+Can Drive
+undefined
+> for(let index = 0; index < namesArray.length; index++){
+... console.log(namesArray[index]);
+... }
+Rahul
+Saurav
+undefined
+> function greetName(name){
+... console.log('Hello, ${name}')
+... }
+undefined
+> greetName("Mitansh")
+Hello, ${name}
+undefined
+> 

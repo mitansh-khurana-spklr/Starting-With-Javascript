@@ -1,0 +1,24 @@
+Last login: Fri May 20 09:48:57 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> function printName(name){
+... console.log(`Hello, ${name}`);
+... }
+undefined
+> printName("Mitansh")
+Hello, Mitansh
+undefined
+> function addNumbers(number1, number2){
+... return number1 + number2;
+... }
+undefined
+> console.log(addNumbers(10, ,12))
+console.log(addNumbers(10, ,12))
+                           ^
+
+Uncaught SyntaxError: Unexpected token ','
+> console.log(addNumbers(10, 12))
+22
+undefined
+> 

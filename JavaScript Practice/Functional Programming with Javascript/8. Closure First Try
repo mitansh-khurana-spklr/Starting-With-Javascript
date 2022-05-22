@@ -1,0 +1,24 @@
+Last login: Sat May 21 19:26:37 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Closure trial
+undefined
+> function outerFunction(){
+... function innerFunction(){
+..... console.log("Hello");
+..... }
+... return innerFunction;
+... }
+undefined
+> const returnValue = outerFunction();
+undefined
+> returnValue();
+Hello
+undefined
+> 
+
+
+
+
+

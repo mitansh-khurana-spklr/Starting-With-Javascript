@@ -1,0 +1,2218 @@
+Last login: Sun May 22 10:14:07 on ttys000
+➜  ~ promise-it-wont-hurt                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16
+  var dataPath = path.join(os.tmpDir(), '~workshopper.wraptmp.' + process.pid)
+                              ^
+
+TypeError: os.tmpDir is not a function
+    at fix (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16:31)
+    at wrappedexec (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:93:5)
+    at Object.<anonymous> (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/exercises/reject_a_promise/exercise.js:27:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Workshopper.loadExercise (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper/workshopper.js:484:14)
+➜  ~ promise-it-wont-hurt
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+
+ Promise It Won’t Hurt
+───────────────────────
+ Warm up
+ Exercise 1 of 13
+
+
+# What is a promise?
+
+One of the new features in ECMAScript 2015 (also called “ES6” and
+“Harmony”) is a new type of objects: promises. It extends the widely known
+Promise/A+ specification and standardizes it to be part of the language
+core.
+
+In its most basic terms, a promise is an object that defines a method called
+then. The promise object represents a value that may be available some time
+in the future. It greatly simplifies asynchronous logic in JavaScript.
+
+Compare the following code, written in the more traditional idiom of
+asynchronous callbacks, with no error handling:
+
+    Parse.User.logIn('user', 'pass', {
+      success: function (user) {
+        query.find({
+          success: function (results) {
+            results[0].save({ key: value }, {
+              success: function (result) {
+                // the object was saved
+              }
+            });
+          }
+        });
+      }
+    });
+
+And the much more elegant Promise workflow, with first-class error handling:
+
+    Parse.User.logIn('user', 'pass').then(function (user) {
+      return query.find();
+    }).then(function (results) {
+      return results[0].save({ key: value });
+    }).then(function (result) {
+      // the object was saved
+    }).catch(function (err) {
+      // an error happened somewhere in the process
+    });
+
+Promises make writing performant, asynchronous code much easier and more fun.
+
+## Task
+
+For this first lesson, let’s review what we already know about asynchronous
+operations in JavaScript.
+
+Using setTimeout, print the string 'TIMED OUT!' after 300ms.
+
+
+ » To print these instructions again, run: promise-it-wont-hurt print
+ » To execute your program in a test environment, run: promise-it-wont-hurt run program.js
+ » To verify your program, run: promise-it-wont-hurt verify program.js
+ » For help run: promise-it-wont-hurt help
+
+
+➜  ~ promise-it-wont-hurt
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16
+  var dataPath = path.join(os.tmpDir(), '~workshopper.wraptmp.' + process.pid)
+                              ^
+
+TypeError: os.tmpDir is not a function
+    at fix (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16:31)
+    at wrappedexec (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:93:5)
+    at Object.<anonymous> (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/exercises/always_async/exercise.js:21:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Workshopper.loadExercise (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper/workshopper.js:484:14)
+➜  ~ promise-it-wont-hurt
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+
+ Promise It Won’t Hurt
+───────────────────────
+ Warm up
+ Exercise 1 of 13
+
+
+# What is a promise?
+
+One of the new features in ECMAScript 2015 (also called “ES6” and
+“Harmony”) is a new type of objects: promises. It extends the widely known
+Promise/A+ specification and standardizes it to be part of the language
+core.
+
+In its most basic terms, a promise is an object that defines a method called
+then. The promise object represents a value that may be available some time
+in the future. It greatly simplifies asynchronous logic in JavaScript.
+
+Compare the following code, written in the more traditional idiom of
+asynchronous callbacks, with no error handling:
+
+    Parse.User.logIn('user', 'pass', {
+      success: function (user) {
+        query.find({
+          success: function (results) {
+            results[0].save({ key: value }, {
+              success: function (result) {
+                // the object was saved
+              }
+            });
+          }
+        });
+      }
+    });
+
+And the much more elegant Promise workflow, with first-class error handling:
+
+    Parse.User.logIn('user', 'pass').then(function (user) {
+      return query.find();
+    }).then(function (results) {
+      return results[0].save({ key: value });
+    }).then(function (result) {
+      // the object was saved
+    }).catch(function (err) {
+      // an error happened somewhere in the process
+    });
+
+Promises make writing performant, asynchronous code much easier and more fun.
+
+## Task
+
+For this first lesson, let’s review what we already know about asynchronous
+operations in JavaScript.
+
+Using setTimeout, print the string 'TIMED OUT!' after 300ms.
+
+
+ » To print these instructions again, run: promise-it-wont-hurt print
+ » To execute your program in a test environment, run: promise-it-wont-hurt run program.js
+ » To verify your program, run: promise-it-wont-hurt verify program.js
+ » For help run: promise-it-wont-hurt help
+
+
+➜  ~ which node
+/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/bin/node
+➜  ~ clear
+
+➜  ~ npm install async
+
+added 1 package, and audited 2 packages in 1s
+
+found 0 vulnerabilities
+➜  ~ npm install async-you -g
+npm WARN deprecated @hapi/bourne@1.3.2: This version has been deprecated and is no longer supported or maintained
+npm WARN deprecated @hapi/topo@3.1.6: This version has been deprecated and is no longer supported or maintained
+npm WARN deprecated sprintf@0.1.5: The sprintf package is deprecated in favor of sprintf-js.
+npm WARN deprecated colors-tmpl@1.0.0: no longer maintained
+npm WARN deprecated @hapi/address@2.1.4: Moved to 'npm install @sideway/address'
+npm WARN deprecated @hapi/hoek@8.5.1: This version has been deprecated and is no longer supported or maintained
+npm WARN deprecated @hapi/joi@15.1.1: Switch to 'npm install joi'
+
+added 151 packages, and audited 152 packages in 14s
+
+5 packages are looking for funding
+  run `npm fund` for details
+
+6 high severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+➜  ~ async-you
+
+
+                                                                              
+   async you - learn to use the async package                                 
+   Select an exercise and hit Enter to begin                                  
+   ─────────────────────────────────────────────────────────────────────────  
+   » WATERFALL                                                                
+   » SERIES OBJECT                                                            
+   » EACH                                                                     
+   » MAP                                                                      
+   » TIMES                                                                    
+   » REDUCE                                                                   
+   » WHILST                                                                   
+   ─────────────────────────────────────────────────────────────────────────  
+   HELP                                                                       
+   CHOOSE LANGUAGE                                                            
+   CHECK FOR UPDATE                                                           
+   EXIT                                                                       
+                                                                              
+
+
+
+
+
+
+   
+ # async you - learn to use the async package  
+   
+ ## WATERFALL (Exercise 1 of 7)  
+   
+  In Node.js and browsers there are three ways to do asynchronous  
+  JavaScript.  
+   
+  The first way leads to what we call Callback Hell. Callback Hell can be  
+  minimized by following the tips at:  
+   
+  (http://callbackhell.com).  
+   
+  Another method is to use a Promise package. Using promises will simplify  
+  your code but it also adds another layer of abstraction.  
+   
+  The last method is by using the async package by Caolan McMahon.  With  
+  async we are still writing callbacks but without falling into the callback  
+  hell or adding another layer of abstraction with promises.  
+   
+  More often than not you will need to do multiple asynchronous calls one  
+  after the other with each call dependent on the result of previous  
+  asynchronous call. We can do this with the help of async.waterfall.  
+   
+  For example the following code will:  
+   
+  1) do a GET request to http://localhost:3131 in the first waterfall  
+  function. 2) The response body is passed as an argument to the next  
+  waterfall function via the callback. The second function in the waterfall  
+  accepts the body as a parameter and JSON.parse's it to get to the port  
+  property then it does another GET request.  
+   
+     var http = require('http')  
+       , async = require('async');  
+       
+     async.waterfall([  
+       function(cb){  
+         var body = '';  
+         // response is JSON encoded object like the following {port: 3132}  
+         http.get("http://localhost:3131", function(res){  
+           res.on('data', function(chunk){  
+             body += chunk.toString();  
+           });  
+           res.on('end', function(){  
+             cb(null, body);  
+           });  
+         }).on('error', function(err) {  
+           cb(err);  
+         });  
+       },  
+       
+       function(body, cb){  
+         var port = JSON.parse(body).port;  
+         var body = '';  
+         http.get("http://localhost:" + port, function(res){  
+           res.on('data', function(chunk){  
+             body += chunk.toString();  
+           });  
+           res.on('end', function(){  
+             cb(null, body);  
+           });  
+         }).on('error', function(err) {  
+           cb(err);  
+         });  
+       }  
+     ], function(err, result){  
+       if (err) return console.error(err);  
+       console.log(result);  
+     });  
+   
+ ## Challenge  
+   
+  In this problem you will need to write a program that first reads the  
+  contents of a file.  
+   
+  The path will be provided as the first command-line argument to your  
+  program (i.e. process.argv[2]).  
+   
+  The file will contain a single URL. Using http.get, create a GET request  
+  to this URL and console.log the response body.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+   » To print these instructions again, run: async-you print                     
+   » To execute your program in a test environment, run: async-you run                                                                            
+     program.js                                                                  
+   » To verify your program, run: async-you verify program.js                    
+   » For help run: async-you help                                                
+   
+➜  ~ async-you
+
+
+                                                                              
+   async you - learn to use the async package                                 
+   Select an exercise and hit Enter to begin                                  
+   ─────────────────────────────────────────────────────────────────────────  
+   » WATERFALL                                                                
+   » SERIES OBJECT                                                            
+   » EACH                                                                     
+   » MAP                                                                      
+   » TIMES                                                                    
+   » REDUCE                                                                   
+   » WHILST                                                                   
+   ─────────────────────────────────────────────────────────────────────────  
+   HELP                                                                       
+   CHOOSE LANGUAGE                                                            
+   CHECK FOR UPDATE                                                           
+   EXIT                                                                       
+                                                                              
+
+
+
+
+
+
+   
+ # async you - learn to use the async package  
+   
+ ## SERIES OBJECT (Exercise 2 of 7)  
+   
+  In this problem we will learn to use async.series.  
+   
+  The main difference between the waterfall and series functions is that the  
+  result from a task function in async.series won't be passed along to the  
+  next function once it completes. series will collect all results as an  
+  array and pass it to the optional callback that runs once all of the task  
+  functions have completed. For example:  
+   
+     async.series([  
+       function(callback){  
+         setTimeout(function() {  
+           callback(null, 'one');  
+         }, 200);  
+       },  
+       function(callback){  
+         setTimeout(function() {  
+           callback(null, 'two');  
+         }, 100);  
+       }  
+     ],  
+     // optional callback  
+     function(err, results){  
+       // results is now equal to ['one', 'two']  
+     });  
+   
+  Instead of using an array as the result container async.series can use an  
+  object, running each property and creating a result object with the same  
+  properties. The above example can be written like so:  
+   
+     async.series({  
+       one: function(done){  
+         done(null, '1');  
+       },  
+       two: function(done){  
+         done(null, '2');  
+       }  
+     }, function(err, results){  
+       console.log(results);  
+       // results will be {one: 1, two: 2}  
+     });  
+   
+ ## Challenge  
+   
+  Write a program that will receive two URLs as the first and second  
+  command-line arguments.  
+   
+  Using http.get, create a GET request to these URLs and pass the response  
+  body to the callback.  
+   
+  Pass in an object of task functions, using the property names requestOne  
+  and requestTwo, to async.series.  
+   
+  console.log the results in the callback for series when all the task  
+  functions have completed.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+   » To print these instructions again, run: async-you print                     
+   » To execute your program in a test environment, run: async-you run                                                                            
+     program.js                                                                  
+   » To verify your program, run: async-you verify program.js                    
+   » For help run: async-you help                                                
+   
+➜  ~ async-you
+
+
+                                                                              
+   async you - learn to use the async package                                 
+   Select an exercise and hit Enter to begin                                  
+   ─────────────────────────────────────────────────────────────────────────  
+   » WATERFALL                                                                
+   » SERIES OBJECT                                                            
+   » EACH                                                                     
+   » MAP                                                                      
+   » TIMES                                                                    
+   » REDUCE                                                                   
+   » WHILST                                                                   
+   ─────────────────────────────────────────────────────────────────────────  
+   HELP                                                                       
+   CHOOSE LANGUAGE                                                            
+   CHECK FOR UPDATE                                                           
+   EXIT                                                                       
+                                                                              
+
+
+
+
+
+
+   
+ # async you - learn to use the async package  
+   
+ ## REDUCE (Exercise 6 of 7)  
+   
+ ## Challenge  
+   
+  Write a program that will receive a URL as the first command line  
+  argument.  
+   
+  To this URL, for each of the values in the following array, send a GET  
+  request using http.get with a query parameter named number set at the  
+  proper value:  
+   
+     ['one', 'two', 'three']  
+   
+  Each time, convert the response body to Number and add it to the previous  
+  value. console.log the final reduced value.  
+   
+ ## Hints  
+   
+  Use async.reduce:  
+   
+  (https://github.com/caolan/async#reduce)  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+   » To print these instructions again, run: async-you print                     
+   » To execute your program in a test environment, run: async-you run                                                                            
+     program.js                                                                  
+   » To verify your program, run: async-you verify program.js                    
+   » For help run: async-you help                                                
+   
+➜  ~ async-you
+
+
+                                                                              
+   async you - learn to use the async package                                 
+   Select an exercise and hit Enter to begin                                  
+   ─────────────────────────────────────────────────────────────────────────  
+   » WATERFALL                                                                
+   » SERIES OBJECT                                                            
+   » EACH                                                                     
+   » MAP                                                                      
+   » TIMES                                                                    
+   » REDUCE                                                                   
+   » WHILST                                                                   
+   ─────────────────────────────────────────────────────────────────────────  
+   HELP                                                                       
+   CHOOSE LANGUAGE                                                            
+   CHECK FOR UPDATE                                                           
+   EXIT                                                                       
+                                                                              
+
+
+
+
+
+
+   
+ # async you - learn to use the async package  
+   
+ ## SERIES OBJECT (Exercise 2 of 7)  
+   
+  In this problem we will learn to use async.series.  
+   
+  The main difference between the waterfall and series functions is that the  
+  result from a task function in async.series won't be passed along to the  
+  next function once it completes. series will collect all results as an  
+  array and pass it to the optional callback that runs once all of the task  
+  functions have completed. For example:  
+   
+     async.series([  
+       function(callback){  
+         setTimeout(function() {  
+           callback(null, 'one');  
+         }, 200);  
+       },  
+       function(callback){  
+         setTimeout(function() {  
+           callback(null, 'two');  
+         }, 100);  
+       }  
+     ],  
+     // optional callback  
+     function(err, results){  
+       // results is now equal to ['one', 'two']  
+     });  
+   
+  Instead of using an array as the result container async.series can use an  
+  object, running each property and creating a result object with the same  
+  properties. The above example can be written like so:  
+   
+     async.series({  
+       one: function(done){  
+         done(null, '1');  
+       },  
+       two: function(done){  
+         done(null, '2');  
+       }  
+     }, function(err, results){  
+       console.log(results);  
+       // results will be {one: 1, two: 2}  
+     });  
+   
+ ## Challenge  
+   
+  Write a program that will receive two URLs as the first and second  
+  command-line arguments.  
+   
+  Using http.get, create a GET request to these URLs and pass the response  
+  body to the callback.  
+   
+  Pass in an object of task functions, using the property names requestOne  
+  and requestTwo, to async.series.  
+   
+  console.log the results in the callback for series when all the task  
+  functions have completed.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+   » To print these instructions again, run: async-you print                     
+   » To execute your program in a test environment, run: async-you run                                                                            
+     program.js                                                                  
+   » To verify your program, run: async-you verify program.js                    
+   » For help run: async-you help                                                
+   
+➜  ~ async-you
+
+
+                                                                              
+   async you - learn to use the async package                                 
+   Select an exercise and hit Enter to begin                                  
+   ─────────────────────────────────────────────────────────────────────────  
+   » WATERFALL                                                                
+   » SERIES OBJECT                                                            
+   » EACH                                                                     
+   » MAP                                                                      
+   » TIMES                                                                    
+   » REDUCE                                                                   
+   » WHILST                                                                   
+   ─────────────────────────────────────────────────────────────────────────  
+   HELP                                                                       
+   CHOOSE LANGUAGE                                                            
+   CHECK FOR UPDATE                                                           
+   EXIT                                                                       
+                                                                              
+
+
+
+
+
+
+   
+ # async you - learn to use the async package  
+   
+ ## WATERFALL (Exercise 1 of 7)  
+   
+  In Node.js and browsers there are three ways to do asynchronous  
+  JavaScript.  
+   
+  The first way leads to what we call Callback Hell. Callback Hell can be  
+  minimized by following the tips at:  
+   
+  (http://callbackhell.com).  
+   
+  Another method is to use a Promise package. Using promises will simplify  
+  your code but it also adds another layer of abstraction.  
+   
+  The last method is by using the async package by Caolan McMahon.  With  
+  async we are still writing callbacks but without falling into the callback  
+  hell or adding another layer of abstraction with promises.  
+   
+  More often than not you will need to do multiple asynchronous calls one  
+  after the other with each call dependent on the result of previous  
+  asynchronous call. We can do this with the help of async.waterfall.  
+   
+  For example the following code will:  
+   
+  1) do a GET request to http://localhost:3131 in the first waterfall  
+  function. 2) The response body is passed as an argument to the next  
+  waterfall function via the callback. The second function in the waterfall  
+  accepts the body as a parameter and JSON.parse's it to get to the port  
+  property then it does another GET request.  
+   
+     var http = require('http')  
+       , async = require('async');  
+       
+     async.waterfall([  
+       function(cb){  
+         var body = '';  
+         // response is JSON encoded object like the following {port: 3132}  
+         http.get("http://localhost:3131", function(res){  
+           res.on('data', function(chunk){  
+             body += chunk.toString();  
+           });  
+           res.on('end', function(){  
+             cb(null, body);  
+           });  
+         }).on('error', function(err) {  
+           cb(err);  
+         });  
+       },  
+       
+       function(body, cb){  
+         var port = JSON.parse(body).port;  
+         var body = '';  
+         http.get("http://localhost:" + port, function(res){  
+           res.on('data', function(chunk){  
+             body += chunk.toString();  
+           });  
+           res.on('end', function(){  
+             cb(null, body);  
+           });  
+         }).on('error', function(err) {  
+           cb(err);  
+         });  
+       }  
+     ], function(err, result){  
+       if (err) return console.error(err);  
+       console.log(result);  
+     });  
+   
+ ## Challenge  
+   
+  In this problem you will need to write a program that first reads the  
+  contents of a file.  
+   
+  The path will be provided as the first command-line argument to your  
+  program (i.e. process.argv[2]).  
+   
+  The file will contain a single URL. Using http.get, create a GET request  
+  to this URL and console.log the response body.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+   » To print these instructions again, run: async-you print                     
+   » To execute your program in a test environment, run: async-you run                                                                            
+     program.js                                                                  
+   » To verify your program, run: async-you verify program.js                    
+   » For help run: async-you help                                                
+   
+➜  ~ clear
+
+➜  ~ npm install -g @workshoppers/scope-chains-closures
+scope-chains-closures # or, shorter: sccjs
+npm WARN skipping integrity check for git dependency ssh://git@github.com/workshopper/adventure.git 
+npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Scope Chains And Closures Workshop
+
+Scope, Scope Chains, Closures, and Garbage Collection all have one thing in
+common: They're often hand-waved away. How do closures actually work? When does
+Garbage Collection occur? What really IS a Scope Chain?
+
+In this workshop, we will discover it's not black magic after all; No hand
+waving is required to explain these language features, in fact you've been using
+them all along without realising.
+
+-------------------------------------------------------------------------------
+
+# Scopes
+
+The main type of scope in Javascript is Lexical Scoping. Present in the language
+from the very beginning, this is the scope created within a function, and the
+one most developers are familiar with.[1]
+
+ES6 recently defined Block Scoping. This scope is created within curly braced
+blocks.[2]
+
+## Initializing Variables
+
+The way a variable is initialized determines which scope type it is:
+
+### Lexical Scope
+
+var is used to denote a variable which is Lexically Scoped to the current
+function:
+
+    function someFunc() {
+      var aVariable;
+    }
+
+aVariable is lexically scoped within someFunc
+
+### Block Scope
+
+let & const are used to denote variables which are Block Scoped to the
+current curly braced block:
+
+    if (true) {
+      let aVariable;
+    }
+
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Scope Chains
+
+## Nesting
+
+Scopes can be nested. Both Lexical and Block scopes can contain other scopes:
+
+    function someFunc() {
+      function inner() {
+      }
+    }
+
+inner is a nested lexical scope inside the lexical scope of someFunc
+
+-------------------------------------------------------------------------------
+
+    if (true) {
+      while (false) {
+      }
+    }
+
+The while is a nested block scope inside the block scope of if
+
+-------------------------------------------------------------------------------
+
+    function someFunc() {
+      if (true) {
+      }
+    }
+
+The if is a nested block scope inside the lexical scope of someFunc
+
+-------------------------------------------------------------------------------
+
+## Scoped Variable Access
+
+All nested scopes follow the same rule: Each nested inner scope has access to
+outer scope variables, but NOT vice-versa.
+
+For example:
+
+    function someFunc() {
+      var outerVar = 1;
+      function inner() {
+        var innerVar = 2;
+      }
+    }
+
+inner has access to both innerVar & outerVar, but someFunc only has
+access to outerVar
+
+## Multiple Nested Scopes
+
+Nesting isn't limited to a single inner scope, there can be multiple nested
+scopes, each of which adhere to the Scoped Variable Access rule above. With
+one addition: sibling scopes are also restricted from accessing each other's
+variables.
+
+For example:
+
+    function someFunc() {
+      function inner() {
+      }
+      function inner2() {
+      }
+    }
+
+inner & inner2 are both inner scopes of someFunc. Just as someFunc
+cannot access inner's variables, inner cannot access inner2's variables
+(and vice versa)
+
+## Scope Tree
+
+Looking at the nesting from top-down, a tree of scopes is formed.
+
+This code
+
+    function someFunc() {
+      function inner() {
+      }
+      function inner2() {
+        function foo() {
+        }
+      }
+    }
+
+Produces this tree
+
+       someFunc()
+           |
+          / \
+         /   \
+        /     \
+       ↓       ↓
+    inner()  inner2()
+               |
+               ↓
+             foo()
+
+Remembering that inner scopes can access outer scope's variables, but not
+vice-versa (foo() can access inner2()'s variables, and inner2() can access
+someFunc()'s variables), then it makes more sense to look at the tree from
+bottom-up, which forms a chain, also known as...
+
+## Scope Chains
+
+Looking from most inner to most outer scope forms a Scope Chain.
+
+       someFunc()
+           ↑
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Global Scope & Shadowing
+
+## Global Scope
+
+Understanding where Scope Chains end is an important part of scoping. All
+Javascript runtimes must implicitly create a Global Scope object (window in
+the browser, global in node), which sits at the top of every scope chain:
+
+        (global)
+           ↑
+           |
+       someFunc()
+           ↑
+          / \
+         /   \
+        /     \
+    inner()  inner2()
+               ↑
+               |
+             foo()
+
+In Scopes we covered how usage of var or let dictates the scope of the
+variable being defined. When assigning a variable without using either of var,
+let, etc, the variable is assumed to exist in an outer scope.
+
+The javascript runtime follows these steps to assign a variable:
+
+ 1) Search within the current scope.
+ 2) If not found, search in the immediately outer scope.
+ 3) If found, go to 6.
+ 4) If not found, repeat 2 and 3 until the Global Scope is reached.
+ 5) If not found in Global Scope, create it (on window / global objects).
+ 6) Assign the value.
+
+In this way, it is possible to accidentally define a global variable (step 5).
+
+### Example Global Scope
+
+Consider the following example:
+
+    function someFunc() {
+       var scopedVar = 1;
+       function inner() {
+          foo = 2;
+       }
+    }
+
+Note the lack of var or let, etc for foo = 2. The Javascript runtime will
+follow the above algorithm, first checking the scope of inner(), then of
+someFunc(), then finally the Global Scope. Step 5 is then executed, so foo
+becomes a variable in the Global Scope (window.foo / global.foo).
+
+Phrased another way: By accidentally forgetting to use var, the variable foo
+which otherwise would have been only within the lexical scope of inner() is
+now available to be modified by any scope. So, someFunc() now has access
+where the developer may have meant for it not to.
+
+Remember: Only inner scopes can access variables of outer scopes. In this case
+the someFunc() scope is an inner scope of the Global Scope, allowing access of
+foo to someFunc().
+
+## Shadowing
+
+A variable is created in a 'Step 0)' of the above algorithm: When var or let
+is used. The variable is assigned to the correct scope, then execution moves on,
+and any assignments to that variable follow the above algorithm.
+
+It is perfectly valid to define two different variables, in different scopes,
+with the same name:
+
+    function someFunc() {
+       var foo = 1;
+    }
+    function anotherFunc() {
+       var foo = 2;
+    }
+
+It is also valid to do this in nested scopes:
+
+    function someFunc() {
+       var foo = 1;
+       function inner() {
+          var foo = 2;
+       }
+    }
+
+This is called Shadowing. The foo inside inner() is said to Shadow the foo
+inside someFunc.
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Closures
+
+Closures are an important part of the Javascript language. They are what enables
+the callback-last programming most prominent in node, and provide an excellent
+mechanism for handling the asynchronous nature of most Javascript tasks.
+
+To properly understand closures, let's start with an example scope chain:
+
+    someFunc()
+        ↑
+        |
+     inner()
+        ↑
+        |
+      foo()
+
+Let's say someFunc() declares a variable bar:
+
+    someFunc()
+     var bar
+        ↑
+        ⋮
+
+Given how nesting scope works, it's possible for an inner scope within
+someFunc() to access bar. In this example, let's say inner() accesses
+bar:
+
+    someFunc()
+     var bar
+        ↑
+        |
+     inner()
+    alert(bar)
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Garbage Collection
+
+Memory in Javascript is managed automatically by the runtime. The runtime
+decides when/if to release any allocated memory. This decision process is called
+Garbage Collection.
+
+Every javascript runtime has their own algorithm for garbage collection, but
+most use a variation of Mark & Sweep. The Mark & Sweep algorithm works by
+marking references to memory (variables, functions, etc) which are still
+reachable from active code. Any reference which is not marked, is swept into
+the garbage (i.e. the memory is freed).
+
+This concept of marking reachable memory is particularly relevant to closures:
+
+     someFunc()
+      var bar
+    return inner
+         ↑
+         |
+      inner()
+     alert(bar)
+         ↑
+         ⋮
+
+When the closure inner() is returned from someFunc(), it maintains its
+reference to bar. The Mark & Sweep algorithm will mark bar as reachable, and
+hence will not garbage collect it.
+
+For inner() to correctly resolve its reference to bar, not only does the
+memory for bar need to be kept, but the scope chain which describes how to
+reach bar must also be kept.
+
+Once the reference to inner() is no longer required, it can be marked for
+garbage collection, which in turn means bar can also be marked, and finally
+the entire scope chain can be marked, resulting in the freeing of all the
+memory.
+
+In this way, Scope, Scope Chains, Closures, and Garbage Collection are all
+closely related.
+
+-------------------------------------------------------------------------------
+
+# Your Mission
+
+In this challenge, you will be required to use Chrome DevTools for detecting
+Garbage Collection events. Follow these steps to get a feel for what happens
+when Chrome performs its Mark & Sweep algorithm:
+
+1)  Fire up a new tab in Chrome
+2)  Open the DevTools > Timeline tab
+3)  Ensure the settings are like so: http://i.imgur.com/RMovIw4.png
+  a) Frames View is unselected (allows seeing memory graphs)
+  b) Flame Chart View is selected (allows seeing where execution time is spent)
+  c) Only "Memory" is selected from the options
+4)  Click the solid gray record button to begin capturing data
+5)  Visit http://www.stackoverflow.com (or your favourite website)
+6)  Click the now-red record button to stop capturing data
+7)  You should now see something similar to: http://i.imgur.com/ZCNMrI1.png
+8)  The part we're interested in is when memory suddenly drops:
+    http://i.imgur.com/FyMyRVI.png
+9)  Click this drop in memory to select it
+10) Now look for the yellow event called "GC Event": http://i.imgur.com/3ieSxIZ.png
+11) Clicking this event will reveal information about total memory garbage
+    collected, and how long it took.
+
+One particularly interesting thing of note here is the length of time Garbage
+Collection can take: Often well beyond the 16ms maximum required to keep it
+within a single frame (at 60fps). While garbage collection occurs, it blocks the
+main thread, which means other Javascript cannot be executed until the event
+completes. Be conscious of how janky your application may become due to
+extensive Garbage Collection events!
+
+Note: If you'd like to get that lovely [COMPLETED] label for this lesson,
+Run @workshoppers/scope-chains-closures verify
+
+
+➜  ~ clear
+
+
+ Currying in JavaScript
+────────────────────────
+ IDENTITY
+ Exercise 1 of 6
+
+
+## Task
+
+Write a function that takes an argument and returns that argument.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+To make a Node.js program, create a new file with a .js extension and start
+writing JavaScript! Execute your program by running it with the node command.
+
+For example:
+
+    $ node program.js
+
+Writing functions that are available to the outside world is different in Node.
+You need to export your function as follows:
+
+    var identity = function (args) {
+      //your code
+
+ Currying in JavaScript
+────────────────────────
+ BINARY
+ Exercise 2 of 6
+
+
+## Task
+
+Write a function that takes two arguments and returns their sum.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+By now you know how to write a function and expose it as a Node module.
+
+Binary functions are functions that accept two arguments.
+
+ Currying in JavaScript
+────────────────────────
+ DELAY INVOCATION
+ Exercise 3 of 6
+
+
+## Task
+
+Write a unary function that takes single input and returns another unary
+function. On calling the second function, it should return the sum of the two
+inputs.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+So far so good!! You are doing great. Now it is time to explore some important
+concepts essential for currying:
+
+  * Lexical Scope
+  * Closures
+
+The solution to this puzzle is creating a closure. A closure is a special kind
+
+ Currying in JavaScript
+────────────────────────
+ LONG_DELAY_INVOCATION
+ Exercise 4 of 6
+
+
+## It's a nice feeling
+
+Wow!! You have just created a very basic curry function. Isn't it amazing how
+simple it is? Let's make it a little more complex. Are you ready?
+
+## Task
+
+Write a function that takes one argument for each invocation. Each time it is
+called, it should add its argument to a running total and return itself. If it is called with no
+arguments, it should return the sum of all the arguments passed.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+So far so good!! You are doing great. Now it is time to explore some important
+concepts essential for currying:
+
+  * Lexical Scope
+  * Closures
+
+The solution to this puzzle is creating a closure. A closure is a special kind
+
+ Currying in JavaScript
+────────────────────────
+ CALL AND APPLY
+ Exercise 5 of 6
+
+
+## Good going!!
+
+Simple currying is good. However delaying invocation for only the second call is
+not extremely advantageous. Also, if all the arguments are already provided,
+then delaying invocation for second or subsequent calls will be unnecessary
+overhead. We want to call our function as:
+
+    sum(3,4); // 7
+    sum(3)(4); // 7
+
+To dive deep into this we first need to understand the following functions:
+
+  * call
+  * apply
+
+For this we have to create two methods, caller (for call) and applier (for
+apply).
+
+## Task
+
+Write a function which will accept a method, an object, and additional
+parameters. Then invoke the method on the object, passing the parameters.
+
+Suppose we have a method:
+
+    var update = function(name, age, tShirtSize) {
+      this.name = name;
+      this.age = age;
+      this.tShirtSize = tShirtSize;
+    };
+
+and a person object:
+
+    var person = { name: 'Kishor', age: 28, tShirtSize: 'L' };
+
+You need to provide the implementation for the method:
+
+    var caller = function (person,
+                           update,
+                           name,         //'Sharma'
+                           age,          // 29
+                           tShirtSize) { // 'XL'
+      // your code here
+    };
+
+    console.log(person) // => person.name = Sharma, person.age = 29 and person.tShirtSize = XL
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+The call() method is inherited from Function.prototype. It calls a function with
+a given 'this' value and arguments provided individually. The apply() method is
+similar to call(), except the arguments are provided as an array.
+
+To know more about call:
+[https://](https://)
+
+To know more about apply:
+[https://](https://)
+
+When you are done, you must run:
+
+    $ curry verify program.js
+
+to proceed. Your program will be tested, a report will be generated, and the
+lesson will be marked 'completed' if you are successful.
+
+-------------------------------------------------------------------------------
+
+ Currying in JavaScript
+────────────────────────
+ CURRY FUNCTION
+ Exercise 6 of 6
+
+
+## Recap
+
+Great, if you've made it this far you have learned following:
+
+  * Closures, their advantages and how to use them.
+  * Function call and apply.
+  * How to make a basic curry function that adds.
+
+What's next?
+
+## Task
+
+Now, using this knowledge, we will create a function that will take another
+function as argument (any function that we want to be curried) and convert it
+into a curried function.
+
+For example, suppose we have a function:
+
+    function abc(a,b,c) {
+    }
+
+You need to write a function that curries that function, so it can be used as
+follows:
+
+    var curriedAbc = curryFunc(abc);
+    curriedAbc(a)(b)(c); // Now we can call original function like this...
+    curriedAbc(a,b)(c); //or this
+    curriedAbc(a)(b,c); //or this
+    curriedAbc(a,b,c); //or this
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+Implementation is taken from an article written by Alex Cruikshank:
+[http://](http://)
+
+I suggest you wait to read the article until you put some significant effort
+into figuring out a solution.
+
+Special thanks to Mr. Cruikshank for such a good article.
+
+When you are done, you must run:
+
+    $ curry verify program.js
+
+to proceed. Your program will be tested, a report will be generated, and the
+lesson will be marked 'completed' if you are successful.
+
+-------------------------------------------------------------------------------
+
+ » To print these instructions again, run: curry print
+ » To execute your program in a test environment, run: curry run program.js
+ » To verify your program, run: curry verify program.js
+ » For help run: curry help
+
+
+➜  ~ clear
+
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Scope Chains And Closures Workshop
+
+Scope, Scope Chains, Closures, and Garbage Collection all have one thing in
+common: They're often hand-waved away. How do closures actually work? When does
+Garbage Collection occur? What really IS a Scope Chain?
+
+In this workshop, we will discover it's not black magic after all; No hand
+waving is required to explain these language features, in fact you've been using
+them all along without realising.
+
+-------------------------------------------------------------------------------
+
+# Scopes
+
+The main type of scope in Javascript is Lexical Scoping. Present in the language
+from the very beginning, this is the scope created within a function, and the
+one most developers are familiar with.[1]
+
+ES6 recently defined Block Scoping. This scope is created within curly braced
+blocks.[2]
+
+## Initializing Variables
+
+The way a variable is initialized determines which scope type it is:
+
+### Lexical Scope
+
+var is used to denote a variable which is Lexically Scoped to the current
+function:
+
+    function someFunc() {
+      var aVariable;
+    }
+
+aVariable is lexically scoped within someFunc
+
+### Block Scope
+
+let & const are used to denote variables which are Block Scoped to the
+current curly braced block:
+
+    if (true) {
+      let aVariable;
+    }
+
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Scope Chains
+
+## Nesting
+
+Scopes can be nested. Both Lexical and Block scopes can contain other scopes:
+
+    function someFunc() {
+      function inner() {
+      }
+    }
+
+inner is a nested lexical scope inside the lexical scope of someFunc
+
+-------------------------------------------------------------------------------
+
+    if (true) {
+      while (false) {
+      }
+    }
+
+The while is a nested block scope inside the block scope of if
+
+-------------------------------------------------------------------------------
+
+    function someFunc() {
+      if (true) {
+      }
+    }
+
+The if is a nested block scope inside the lexical scope of someFunc
+
+-------------------------------------------------------------------------------
+
+## Scoped Variable Access
+
+All nested scopes follow the same rule: Each nested inner scope has access to
+outer scope variables, but NOT vice-versa.
+
+For example:
+
+    function someFunc() {
+      var outerVar = 1;
+      function inner() {
+        var innerVar = 2;
+      }
+    }
+
+inner has access to both innerVar & outerVar, but someFunc only has
+access to outerVar
+
+## Multiple Nested Scopes
+
+Nesting isn't limited to a single inner scope, there can be multiple nested
+scopes, each of which adhere to the Scoped Variable Access rule above. With
+one addition: sibling scopes are also restricted from accessing each other's
+variables.
+
+For example:
+
+    function someFunc() {
+      function inner() {
+      }
+      function inner2() {
+      }
+    }
+
+inner & inner2 are both inner scopes of someFunc. Just as someFunc
+cannot access inner's variables, inner cannot access inner2's variables
+(and vice versa)
+
+## Scope Tree
+
+Looking at the nesting from top-down, a tree of scopes is formed.
+
+This code
+
+    function someFunc() {
+      function inner() {
+      }
+      function inner2() {
+        function foo() {
+        }
+      }
+    }
+
+Produces this tree
+
+       someFunc()
+           |
+          / \
+         /   \
+        /     \
+       ↓       ↓
+    inner()  inner2()
+               |
+               ↓
+             foo()
+
+Remembering that inner scopes can access outer scope's variables, but not
+vice-versa (foo() can access inner2()'s variables, and inner2() can access
+someFunc()'s variables), then it makes more sense to look at the tree from
+bottom-up, which forms a chain, also known as...
+
+## Scope Chains
+
+Looking from most inner to most outer scope forms a Scope Chain.
+
+       someFunc()
+           ↑
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Global Scope & Shadowing
+
+## Global Scope
+
+Understanding where Scope Chains end is an important part of scoping. All
+Javascript runtimes must implicitly create a Global Scope object (window in
+the browser, global in node), which sits at the top of every scope chain:
+
+        (global)
+           ↑
+           |
+       someFunc()
+           ↑
+          / \
+         /   \
+        /     \
+    inner()  inner2()
+               ↑
+               |
+             foo()
+
+In Scopes we covered how usage of var or let dictates the scope of the
+variable being defined. When assigning a variable without using either of var,
+let, etc, the variable is assumed to exist in an outer scope.
+
+The javascript runtime follows these steps to assign a variable:
+
+ 1) Search within the current scope.
+ 2) If not found, search in the immediately outer scope.
+ 3) If found, go to 6.
+ 4) If not found, repeat 2 and 3 until the Global Scope is reached.
+ 5) If not found in Global Scope, create it (on window / global objects).
+ 6) Assign the value.
+
+In this way, it is possible to accidentally define a global variable (step 5).
+
+### Example Global Scope
+
+Consider the following example:
+
+    function someFunc() {
+       var scopedVar = 1;
+       function inner() {
+          foo = 2;
+       }
+    }
+
+Note the lack of var or let, etc for foo = 2. The Javascript runtime will
+follow the above algorithm, first checking the scope of inner(), then of
+someFunc(), then finally the Global Scope. Step 5 is then executed, so foo
+becomes a variable in the Global Scope (window.foo / global.foo).
+
+Phrased another way: By accidentally forgetting to use var, the variable foo
+which otherwise would have been only within the lexical scope of inner() is
+now available to be modified by any scope. So, someFunc() now has access
+where the developer may have meant for it not to.
+
+Remember: Only inner scopes can access variables of outer scopes. In this case
+the someFunc() scope is an inner scope of the Global Scope, allowing access of
+foo to someFunc().
+
+## Shadowing
+
+A variable is created in a 'Step 0)' of the above algorithm: When var or let
+is used. The variable is assigned to the correct scope, then execution moves on,
+and any assignments to that variable follow the above algorithm.
+
+It is perfectly valid to define two different variables, in different scopes,
+with the same name:
+
+    function someFunc() {
+       var foo = 1;
+    }
+    function anotherFunc() {
+       var foo = 2;
+    }
+
+It is also valid to do this in nested scopes:
+
+    function someFunc() {
+       var foo = 1;
+       function inner() {
+          var foo = 2;
+       }
+    }
+
+This is called Shadowing. The foo inside inner() is said to Shadow the foo
+inside someFunc.
+
+                                                                       
+    @WORKSHOPPERS/SCOPE-CHAINS-CLOSURES                                
+    -----------------------------------                                
+    1. Scopes                                                          
+    2. Scope Chains                                                    
+    3. Global Scope & Shadowing                                        
+    4. Closures                                                        
+    5. Garbage Collection                                              
+    -----------------                                                  
+    HELP                                                               
+    EXIT                                                               
+                                                                       
+
+
+# Closures
+
+Closures are an important part of the Javascript language. They are what enables
+the callback-last programming most prominent in node, and provide an excellent
+mechanism for handling the asynchronous nature of most Javascript tasks.
+
+To properly understand closures, let's start with an example scope chain:
+
+    someFunc()
+        ↑
+        |
+     inner()
+        ↑
+        |
+      foo()
+
+Let's say someFunc() declares a variable bar:
+
+    someFunc()
+     var bar
+        ↑
+        ⋮
+
+Given how nesting scope works, it's possible for an inner scope within
+someFunc() to access bar. In this example, let's say inner() accesses
+bar:
+
+    someFunc()
+     var bar
+        ↑
+        |
+     inner()
+    alert(bar)
+        ↑
+        ⋮
+
+Then inner() is said to Close Over bar. Therefore inner() is a Closure.
+
+To power the callback style of programming, the closure will be maintained even
+if inner() isn't executed immediately. It is perfectly legal in Javascript to
+pass inner around / return it from someFunc() for later execution. All the
+while, bar will continue to be available.
+
+-------------------------------------------------------------------------------
+
+# Your Mission
+
+Modify your solution from the previous lesson to set bar = true inside zip(),
+then return the function zip as the result of foo()
+
+Once complete, execute @workshoppers/scope-chains-closures verify <your-file.js> to verify your
+solution.
+
+
+➜  ~ promise-it wont hurt
+zsh: command not found: promise-it
+➜  ~ promise
+zsh: command not found: promise
+➜  ~ promise-it-wont-hurt
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16
+  var dataPath = path.join(os.tmpDir(), '~workshopper.wraptmp.' + process.pid)
+                              ^
+
+TypeError: os.tmpDir is not a function
+    at fix (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:16:31)
+    at wrappedexec (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper-wrappedexec/wrappedexec.js:93:5)
+    at Object.<anonymous> (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/exercises/fulfill_a_promise/exercise.js:27:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Workshopper.loadExercise (/Users/mitansh.khurana/.nvm/versions/node/v16.15.0/lib/node_modules/promise-it-wont-hurt/node_modules/@timothygu/workshopper/workshopper.js:484:14)
+➜  ~ async
+zsh: command not found: async
+➜  ~ promise-it-wont-hurt
+
+
+                                                                       
+    Promise It Won’t Hurt                                              
+    Learn to use promises in Node and browsers                         
+    ─────────────────────────────────────────────────────────────────  
+    » Warm up                                                          
+    » Fulfill a promise                                                
+    » Reject a promise                                                 
+    » To reject or not to reject                                       
+    » Always asynchronous                                              
+    » Shortcuts                                                        
+    » Promise after promise                                            
+    » Values and promises                                              
+    » Throw an error                                                   
+    » An important rule                                                
+    » Multiple promises                                                
+    » Fetch JSON                                                       
+    » Do some work                                                     
+    ─────────────────────────────────────────────────────────────────  
+    HELP                                                               
+    CHOOSE LANGUAGE                                                    
+    EXIT                                                               
+                                                                       
+
+
+ Promise It Won’t Hurt
+───────────────────────
+ Warm up
+ Exercise 1 of 13
+
+
+# What is a promise?
+
+One of the new features in ECMAScript 2015 (also called “ES6” and
+“Harmony”) is a new type of objects: promises. It extends the widely known
+Promise/A+ specification and standardizes it to be part of the language
+core.
+
+In its most basic terms, a promise is an object that defines a method called
+then. The promise object represents a value that may be available some time
+in the future. It greatly simplifies asynchronous logic in JavaScript.
+
+Compare the following code, written in the more traditional idiom of
+asynchronous callbacks, with no error handling:
+
+    Parse.User.logIn('user', 'pass', {
+      success: function (user) {
+        query.find({
+          success: function (results) {
+            results[0].save({ key: value }, {
+              success: function (result) {
+                // the object was saved
+              }
+            });
+          }
+        });
+      }
+    });
+
+And the much more elegant Promise workflow, with first-class error handling:
+
+    Parse.User.logIn('user', 'pass').then(function (user) {
+      return query.find();
+    }).then(function (results) {
+      return results[0].save({ key: value });
+    }).then(function (result) {
+      // the object was saved
+    }).catch(function (err) {
+      // an error happened somewhere in the process
+    });
+
+Promises make writing performant, asynchronous code much easier and more fun.
+
+## Task
+
+For this first lesson, let’s review what we already know about asynchronous
+operations in JavaScript.
+
+Using setTimeout, print the string 'TIMED OUT!' after 300ms.
+
+
+ » To print these instructions again, run: promise-it-wont-hurt print
+ » To execute your program in a test environment, run: promise-it-wont-hurt run program.js
+ » To verify your program, run: promise-it-wont-hurt verify program.js
+ » For help run: promise-it-wont-hurt help
+
+
+➜  ~ clear
+
+
+ FUNCTIONAL JAVASCRIPT IS GOOD
+───────────────────────────────
+ Basic: Every Some
+ Exercise 5 of 18
+
+
+# Task
+
+Return a function that takes a list of valid users, and returns a function that returns true if all of the supplied users exist in the original list of users.
+
+You only need to check that the ids match.
+
+## Example
+
+    var goodUsers = [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 }
+    ]
+    
+    // `checkUsersValid` is the function you'll define
+    var testAllValid = checkUsersValid(goodUsers)
+    
+    testAllValid([
+      { id: 2 },
+      { id: 1 }
+    ])
+    // => true
+    
+    testAllValid([
+      { id: 2 },
+      { id: 4 },
+      { id: 1 }
+    ])
+    // => false
+
+## Arguments
+
+  * goodUsers: a list of valid users
+
+Use array#some and Array#every to check every user passed to your returned function exists in the array passed to the exported function.
+
+## Conditions
+
+  * Do not use any for/while loops or Array#forEach.
+  * Do not create any unnecessary functions e.g. helpers.
+
+## Resources
+
+
+ FUNCTIONAL JAVASCRIPT IS GOOD
+───────────────────────────────
+ Basic: Reduce
+ Exercise 6 of 18
+
+
+# Task
+
+Given an Array of strings, use Array#reduce to create an object that contains the number of times each string occured in the array. Return the object directly (no need to console.log).
+
+## Example
+
+    var inputWords = ['Apple', 'Banana', 'Apple', 'Durian', 'Durian', 'Durian']
+    
+    console.log(countWords(inputWords))
+    
+    // =>
+    // {
+    //   Apple: 2,
+    //   Banana: 1,
+    //   Durian: 3
+    // }
+
+## Arguments
+
+  * inputWords: An array of random Strings.
+
+## Conditions
+
+  * Do not use any for/while loops or Array#forEach.
+  * Do not create any unnecessary functions e.g. helpers.
+
+
+ FUNCTIONAL JAVASCRIPT IS GOOD
+───────────────────────────────
+ Basic: Call
+ Exercise 8 of 18
+
+JavaScript implements 'duck' typing. Duck typing is a style of dynamic typing in which an object's methods and properties determine the valid semantics, rather than its inheritance from a particular class or implementation of a specific interface. The name of the concept refers to the duck test, attributed to James Whitcomb Riley, which may be phrased as follows:
+
+  "When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck"
+
+In JavaScript, in order to write robust programs we sometimes need to check an object conforms to the type that we need.
+
+We can use Object#hasOwnProperty to detect if an object 'has' a property defined on itself (i.e. not inherited from its prototype):
+
+    var duck = {
+      quack: function() {
+        console.log('quack')
+      }
+    }
+    
+    duck.hasOwnProperty('quack') // => true
+
+We didn't give the duck a .hasOwnProperty method, where did it come from?
+
+Duck was created with the {} syntax, and as such it inherits from Object.prototype:
+
+    var object = {quack: true}
+    
+    Object.getPrototypeOf(object) === Object.prototype // => true
+    object.hasOwnProperty('quack')                     // => true
+
+But what if an object doesn't inherit from Object.prototype?
+
+    // create an object with 'null' prototype.
+    var object = Object.create(null)
+    object.quack = function() {
+      console.log('quack')
+    }
+    
+    Object.getPrototypeOf(object) === Object.prototype // => false
+    Object.getPrototypeOf(object) === null             // => true
+    
+    object.hasOwnProperty('quack')
+    // => TypeError: Object object has no method 'hasOwnProperty'
+
+We can still use hasOwnProperty from the Object.prototype though, if we call it with the this value set to something that 'looks like an object'. Function#call allows us to invoke any function with an altered this value.
+
+    // the first argument to call becomes the value of `this`
+    // the rest of the arguments are passed to the function as per
+    
+    Object.prototype.hasOwnProperty.call(object, 'quack') // => true
+
+# Task:
+
+Write a function duckCount that returns the number of arguments passed to it which have a property 'quack' defined directly on them. Do not match values inherited from prototypes.
+
+Example:
+
+    var notDuck = Object.create({quack: true})
+    var duck = {quack: true}
+    duckCount(duck, notDuck) // 1
+
+## Arguments
+
+  * You will be passed 0-20 arguments. Each argument could be of any type with any properties. Some of these items will have a 'quack' property.
+
+## Conditions
+
+  * Do not use any for/while loops or Array#forEach.
+  * Do not create any counter/accumulator variables.
+  * Do not create any unnecessary functions e.g. helpers.
+
+## Hint
+
+  * The `arguments` variable, available in every function, is an *Object* that quacks like an *Array*:
+
+    {
+      0: 'argument0',
+      1: 'argument1', // etc
+      length: 2
+    }
+
+## Resources
+
+  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+
+ FUNCTIONAL JAVASCRIPT IS GOOD
+───────────────────────────────
+ Implement Map with Reduce
+ Exercise 11 of 18
+
+
+# Task
+
+Use Array#reduce to implement a simple version of Array#map.
+
+## Expected Output
+
+A function map that applies a function to each item in an array and collects the results in a new Array.
+
+    
+    var nums = [1,2,3,4,5]
+    
+    // `map` is your exported function
+    var output = map(nums, function double(item) {
+      return item * 2
+    })
+    
+    console.log(output) // => [2,4,6,8,10]
+    
+
+## Arguments
+
+  * input: an arbitrary Array of any type.
+  * operation: an arbitrary Function which can be applied to items in `input`.
+
+## Hints
+
+  * No need to implement the optional `thisArg` argument of `Array.prototype.map`, bonus points if you do!
+
+
+ FUNCTIONAL JAVASCRIPT IS GOOD
+───────────────────────────────
+ Higher Order Functions
+ Exercise 2 of 18
+
+A higher-order function is a function that does at least one of the following:
+
+  * Take one or more functions as an input
+  * Output a function
+
+All other functions are first order functions. [1]
+
+Unlike many other languages with imperative features, JavaScript allows you to utilize higher-order functions because it has "first-class functions". This means functions can be treated just like any other value in JavaScript: just like Strings or Numbers, Function values can be stored as variables, properties on objects or passed to other functions as arguments. Function values are actually Objects (inheriting from Function.prototype) so you can even add properties and store values on them, just like any regular Object.
+
+The key difference between Functions and other value types in JavaScript is the call syntax: if a reference to a function is followed by parenthesis and some optional comma-separated values: someFunctionValue(arg1, arg2, etc), then the function body will be executed with the supplied arguments (if any).
+
+In this exercise we're going to demonstrate that functions can be passed as values by passing you a function as an argument.
+
+# Task
+
+Implement a function that takes a function as its first argument, a number num as its second argument, then executes the passed in function num times.
+
+Use the boilerplate code given to you below to get started. Most/all future exercises will provide boilerplate.
+
+## Arguments
+
+  * operation: A Function, takes no arguments, returns no useful value.
+  * num: the number of times to call `operation`
+
+## Resources
+
+  * https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions_and_function_scope
+  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype
+
+## Hints
+
+  * Don't overthink it, the code should be rather simple.
+  * It's ok to use a loop in your implementation, bonus points if you use recursion instead.
+  * You may notice some output. That is coming from the function we passed you.
+  * You do not need to console.log anything.
+
+## Boilerplate
+
+    function repeat(operation, num) {
+      // SOLUTION GOES HERE
+    }
+    
+    // Do not remove the line below
+    module.exports = repeat
+
+
+ » To print these instructions again, run: functional-javascript print
+ » To execute your program in a test environment, run: functional-javascript run program.js
+ » To verify your program, run: functional-javascript verify program.js
+ » For help run: functional-javascript help
+
+
+➜  ~ 

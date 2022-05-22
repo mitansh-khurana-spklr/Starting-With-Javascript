@@ -1,0 +1,23 @@
+Last login: Fri May 20 10:39:20 on ttys000
+n%                                                                              ➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> let num1 = Number("16")
+undefined
+> typeof(num1)
+'number'
+> let str1 = String(12);
+undefined
+> typeof(str1);
+'string'
+> 
+
+
+
+
+
+
+
+
+
+

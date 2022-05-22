@@ -1,0 +1,22 @@
+Last login: Sat May 21 19:30:55 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> //Create a function createFunctionPrinter that accepts one input and returns a function.
+undefined
+> // When that created function is called, it should print out the input that was used when the function was created.
+undefined
+> function outer(input){
+... function inner(){
+..... console.log(input);
+..... }
+... return inner;
+... }
+undefined
+> const returnFunc = outer(5);
+undefined
+> returnFunc();
+5
+undefined
+> 
+

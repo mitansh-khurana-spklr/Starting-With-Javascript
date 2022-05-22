@@ -1,0 +1,23 @@
+Last login: Sat May 21 20:18:27 on ttys000
+nod%                                                                            ➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Partial Application
+undefined
+> function add(num1, num2){
+... return num1 + num2;
+... }
+undefined
+> function partial(add, num1){
+... function newFunc(num2){
+..... return add(num1, num2);
+..... }
+... return newFunc;
+... }
+undefined
+> const add2 = partial(add, 2);
+undefined
+> console.log(add2(3));
+5
+undefined
+> 

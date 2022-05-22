@@ -1,0 +1,47 @@
+Last login: Sat May 21 19:56:39 on ttys000
+n%                                                                              ➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Create a function russianRoulette that accepts a number (let us call it n), and returns a function. The returned function will take no arguments, and will return the string 'click' the first n - 1 number of times it is invoked. On the very next invocation (the nth invocation), the returned function will return the string 'bang'. On every invocation after that, the returned function returns the string 'reload to play again'.
+undefined
+> function russianRoulette(n){
+... function innerFunc(){
+..... if(n > 0){
+....... console.log("Click");
+....... }
+..... else if(n === 0){
+....... console.log("Bang");
+....... }
+..... else{
+....... console.log("Reload to play again");
+....... }
+..... n--;
+..... }
+... return innerFunc;
+... }
+undefined
+> const playGame = russianRoulette();
+undefined
+> playGame = russianRoulette(3);
+Uncaught TypeError: Assignment to constant variable.
+> const playGame2 = russianRoulette(3);
+undefined
+> playGame2();
+Click
+undefined
+> playGame2();
+Click
+undefined
+> playGame2();
+Click
+undefined
+> playGame2();
+Bang
+undefined
+> playGame2();
+Reload to play again
+undefined
+> playGame2();
+Reload to play again
+undefined
+> 

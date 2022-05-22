@@ -1,0 +1,35 @@
+Last login: Sat May 21 19:38:32 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Using closure to make a function only run once
+undefined
+> function outer(){
+... let counter = 0;
+... function inner(){
+..... if(counter === 0){
+....... function actualFunction(){
+......... console.log("Running...");
+......... }
+....... actualFunction();
+....... }
+..... else{
+....... console.log("Sorry can't run multiple times");
+....... }
+..... counter++;
+..... }
+... return inner;
+... }
+undefined
+> const returnFunc = outer();
+undefined
+> returnFunc();
+Running...
+undefined
+> returnFunc();
+Sorry can't run multiple times
+undefined
+> returnFunc();
+Sorry can't run multiple times
+undefined
+> 

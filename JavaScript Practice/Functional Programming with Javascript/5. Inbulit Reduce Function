@@ -1,0 +1,24 @@
+Last login: Sat May 21 18:38:14 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Using inbulit reduce function
+undefined
+> const input = [10, 20, 30];
+undefined
+> function addFunc(prevValue, currValue){
+... return prevValue + currValue;
+... }
+undefined
+> const output = input.reduce(addFunc);
+undefined
+> console.log(output);
+60
+undefined
+> 
+
+
+
+
+
+

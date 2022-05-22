@@ -1,0 +1,26 @@
+Last login: Sat May 21 18:37:21 on ttys000
+node%                                                                           ➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Self Implementation of reduce function 
+undefined
+> // Function takes in the array, callback and initial valueOf
+undefined
+> const selfReduce = (array, callback, initial) => {
+... let ans = initial;
+... for(let index = 0; index < array.length; index++){
+..... ans = callback(ans, array[index]);
+..... }
+... return ans;
+... }
+undefined
+> const addFunc = (previousValue, currentValue) => {
+... return previousValue + currentValue;
+... }
+undefined
+> const output = selfReduce([10, 20, 30], addFunc, 0);
+undefined
+> console.log(output);
+60
+undefined
+> 

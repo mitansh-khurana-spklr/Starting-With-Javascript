@@ -1,0 +1,35 @@
+Last login: Fri May 20 10:58:57 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Experimenting with classes
+undefined
+> class Student{
+... constructor(name, age){
+..... this.name = name;
+..... this.age = age;
+..... }
+... 
+... canDrive(){
+... if(this.age >= 18){
+..... console.log("Yes, can drive");
+..... }
+... else{
+..... console.log("No, cannot drive");
+..... }
+... }
+... }
+undefined
+> let student1 = new Student("Mitansh", 20);
+undefined
+> let student2 = new Student("Rahul", 16);
+undefined
+> student1
+Student { name: 'Mitansh', age: 20 }
+> student1.canDrive()
+Yes, can drive
+undefined
+> student2.canDrive()
+No, cannot drive
+undefined
+> 

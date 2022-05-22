@@ -1,0 +1,27 @@
+Last login: Fri May 20 10:33:12 on ttys000
+node%                                                                           ➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> let favBooks = []
+undefined
+> function addFavBooks(book){
+... if(!book.includes("Great")){
+..... favBooks.push(book)
+..... }
+... }
+undefined
+> addFavBooks("A song of ice and fire")
+undefined
+> addFavBooks("The Great Gatsby")
+undefined
+> addFavBooks("Crime and Punishment")
+undefined
+> addFavBooks("Great expectations")
+undefined
+> for(let index = 0; index < favBooks.length; index++){
+... console.log(favBooks[index]);
+... }
+A song of ice and fire
+Crime and Punishment
+undefined
+> 

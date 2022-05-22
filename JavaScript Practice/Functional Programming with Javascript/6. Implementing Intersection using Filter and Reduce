@@ -1,0 +1,24 @@
+Last login: Sat May 21 19:04:25 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Implementing intersection using reduce
+undefined
+> const array1 = [1, 2, 3, 4, 5];
+undefined
+> const array2 = [3, 4, 5, 6, 7];
+undefined
+> const helperArray = [array1, array2];
+undefined
+> function interesction(prev, curr){
+... prev = prev.filter((element) => { return curr.includes(element) });
+... return prev;
+... }
+undefined
+> const output = helperArray.reduce(interesction, helperArray[0]);
+undefined
+> console.log(output);
+[ 3, 4, 5 ]
+undefined
+> 
+

@@ -1,0 +1,24 @@
+Last login: Sat May 21 18:23:53 on ttys000
+➜  ~ node
+Welcome to Node.js v16.15.0.
+Type ".help" for more information.
+> // Using the inbulit map function
+undefined
+> const numbers = [1, 2, 3];
+undefined
+> function mutiplyBy10(input){
+... return input*10;
+... }
+undefined
+> const output = numbers.map(mutiplyBy10);
+undefined
+> console.log(output);
+[ 10, 20, 30 ]
+undefined
+> 
+
+
+
+
+
+
