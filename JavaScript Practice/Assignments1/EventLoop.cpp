@@ -13,7 +13,7 @@ void eventLoop(stack<string> callStack, queue<string> callBackQueue){
     // Task4 takes 2 unit time to complete and is popped at timer == 7 from callStack
 
     // BrowserTask1 takes 2 unit time to complete
-    // BrowserTask1 takes 3 unit time to complete
+    // BrowserTask2 takes 3 unit time to complete
 
     while(callBackQueue.size() != 0 && callStack.size() != 0){
         while(callStack.size() != 0){
