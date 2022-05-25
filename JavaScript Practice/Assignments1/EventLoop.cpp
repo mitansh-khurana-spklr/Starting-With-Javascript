@@ -9,8 +9,8 @@ void eventLoop(stack<string> callStack, queue<string> callBackQueue){
 
     // Task1 takes 2 unit time to complete and is popped at timer == 0 from callStack
     // Task2 takes 4 unit time to complete and is popped at timer == 2 from callStack
-    // Task1 takes 1 unit time to complete and is popped at timer == 6 from callStack
-    // Task1 takes 2 unit time to complete and is popped at timer == 7 from callStack
+    // Task3 takes 1 unit time to complete and is popped at timer == 6 from callStack
+    // Task4 takes 2 unit time to complete and is popped at timer == 7 from callStack
 
     // BrowserTask1 takes 2 unit time to complete
     // BrowserTask1 takes 3 unit time to complete
