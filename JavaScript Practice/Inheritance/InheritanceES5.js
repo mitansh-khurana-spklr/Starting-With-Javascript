@@ -14,8 +14,7 @@ Person.prototype.getAge = function(){
 
 
 function Student(name, age, course){
-    this.name = name;
-    this.age = age;
+    Person.call(this, name, age);
     this.course = course;
 }
 
